@@ -1,0 +1,1 @@
+python score/der+dpcost+purity.py -r score/reference.list -s spkr_diar/tmp/ -pu

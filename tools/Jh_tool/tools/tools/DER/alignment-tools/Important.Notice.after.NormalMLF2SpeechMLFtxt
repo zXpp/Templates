@@ -1,0 +1,33 @@
+1. link the output MLF of DNN to current folder, e.g.:
+ln -s /share/spandh.ami1/usr/yanxiong/tnet.ami-tbl.sad/onlyfbank/nn.368.1000.1000.2/test_hyp.mlf-prob0.85-sf0.4-mix10 test_hyp.mlf.dnn1.MIX
+
+2. run:
+python NormalMLF2SpeechMLF.py  test_hyp.mlf.dnni1.MIX
+
+and get a new MIX reference fils for alignment:
+test_hyp.mlf.dnn1.MIX.ForAlign
+
+3. Open normal MIX reference file: test_hyp.mlf.dnni1.MIX, and ForAlign MIX reference file: test_hyp.mlf.dnn1.MIX.ForAlign. Check the last segment for each MIX file (e.g. TBL0601-MIXA1.rec) in normal MIX refernece file. If the last segment in normal MIX reference is SPEECH, then change the end point of the last segment in ForAlign MIX file (i.e. test_hyp.mlf.dnn1.MIX.ForAlign) by minus 1 !!
+
+For example, the last segment of "*/TBL0601-MIXA1.rec" in normal MIX reference file (test_hyp.mlf.dnn1.MIX) is:
+21732300000 21743000000 SPEECH -103.817879
+
+And the last segment of TBL0601-MIXA1.lab in ForAling MIX reference file(test_hyp.mlf.dnn1.MIX.ForAlign) is:
+"*/TBL0601-MIXA1_217323_217430.lab"
+
+Then change the end point of the last segment in ForAlign MIX reference file as:
+"*/TBL0601-MIXA1_217323_217429.lab"
+
+If the last segment in normal MIX reference is NONSPEECH, don't need to change the end point of the corresponding last segment in ForAlign MIX reference file.
+
+4. Do the same thing for TBL0901-MIXA1.lab, TBL1501-MIXA1.lab, TBL1702-MIXA1.lab, TBL2001-MIXA1.lab, TBL2101-MIXA1.lab, TBL2202-MIXA1.lab, TBL2301-MIXA1.lab, TBL2401-MIXA1.lab, TBL2501-MIXA1.lab, in the ForAlign MIX reference file.
+
+#################################################################################################################################################
+####################################### The most important note #################################################################################
+5. If you use both CrossTalk Features and Fbank Feautures, you MUST open the posteriors files for determing the end point of the last segment!!! Due to the frame number of CrossTalk features is smaller than that of Fbank features. So, the end point of the last segment MUST be determined by the frame number of Crosstalk features!!
+#################################################################################################################################################
+
+-------------------------------------------
+The reason why we need to minus 1 for the end point of the last segment in ForAlign MIX reference file when the last segment is SPEECH in normal MIX reference file is:
+the frame number of features listed in SCP file begin with 0 and end with X-1, where X is the total number of frame. In ForAlign MIX reference file (MLF files), the end point of the last segment is X. Hence, if the last segment is SPEECH, the frame number of the last line in SCP file will be X, which is beyond the maximum frame number X-1.  
+

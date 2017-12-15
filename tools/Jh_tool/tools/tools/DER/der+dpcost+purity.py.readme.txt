@@ -1,0 +1,7 @@
+For scoring segmentation, you run like this with the dpcost flag:
+
+python der+dpcost+purity.py -r /path/to/referencelist/file -s /path/to/sysrttm/folder/ -dp
+
+and for channel identification you run like this (with the purity flag - not sure if using this metrics but it's interested to see anyway):
+
+python der+dpcost+purity.py -r /path/to/referencelist/file -s /path/to/sysrttm/folder/ -pu

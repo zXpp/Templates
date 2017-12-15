@@ -1,0 +1,23 @@
+#!/bin/tcsh
+
+if ( $#argv < 1 || $#argv > 2  ) then 
+    echo "usage: $0 [<remotehost>] <remotedir>"; exit
+endif
+
+if ( $#argv == 1 ) then
+
+   set RDIR = `dirname "$1"/.`
+
+   rsync -rlptgHoDuz "$RDIR" . 
+
+else
+
+   set RHOST = $1
+   set RDIR = `dirname "$2"/.`
+
+   rsync -e ssh -rlptgHoDuz ${RHOST}:"${RDIR}" .
+
+endif 
+
+
+

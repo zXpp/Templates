@@ -1,0 +1,19 @@
+step 1: create a der folder and a rttm folder: mkdir der rttm
+
+
+step 2: create a link to your new test_hyp.mlf: ln -s /path/to/test_hyp.mlf
+
+
+step 3: create the system rttm files (sys.rttm), inside the output folder run my converting script which will output all the corresponding rttm files into the rttm folder:
+python /share/spandh.ami1/usr/yanxiong/tools/onemlf2manyspeechrttm.py test_hyp.mlf
+
+
+step 4: run:
+python /share/spandh.ami1/usr/yanxiong/tools/DER/scoring_der+boundary.py -rl new_reference.list -sp rttm/ --speech  > err.der
+
+
+
+
+####################################
+step 4: Run the score_speech.py script like so: 
+python ./score_speech.py ./new_reference.list > DER

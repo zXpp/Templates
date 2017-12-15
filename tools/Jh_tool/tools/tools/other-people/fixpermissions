@@ -1,0 +1,11 @@
+#!/bin/tcsh
+# (c) Thomas Hain 2005
+
+set GRP = mini
+if ( $#argv == 1) then 
+	set GRP = $1
+endif
+
+find . -type d -user $USER -exec chmod g+rwx {} ";"
+find . -user $USER -exec chgrp $GRP {} ";"
+find . -user $USER -exec chmod g+r,o-rwx {} ";"

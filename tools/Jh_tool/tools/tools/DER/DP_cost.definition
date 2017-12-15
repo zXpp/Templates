@@ -1,0 +1,12 @@
+DP cost is in milliseconds, the amount of time per reference boundary away from the system boundaries
+
+Nmatches is number of correctly matched boundaries (with the percentage in brackets)
+
+Nins is number of insertions in the system boundaries (with the percentage in brackets)
+
+Ndels is number of deletions of reference boundaries (with the percentage in brackets)
+
+ERR is average error == (nins% + ndels%) / number of reference boundaries
+
+The paper has more details and probably a better explanation!
+[vanvuuren+tenbosch+niesler_interspeech13] A dynamic programming framework for neural network-based automatic speech segmentation
